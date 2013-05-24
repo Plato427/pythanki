@@ -1,0 +1,24 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+''' Returns an Anki importable txt file named 'to_anki.txt' containing the lines
+z1, z2, ..., zn from document 'txt_to_learn.txt' in the following order:
+
+z1 z2 delim z3 '''
+
+
+#_______________________________________
+
+with open('text_to_learn.txt','r') as f:
+    read_data = f.read()
+f.closed
+
+delim=';;'
+lines=read_data.split('\n')#list of lines
+num_lines=len(lines)
+
+with open('to_anki.txt','w') as out:
+    for i in range(0,num_lines-3):
+        out.write(lines[i]+'<br>'+lines[i+1]+delim+lines[i+2]+'\n')
+    out.write(lines[num_lines-2]+'<br>'+lines[num_lines-1]+delim+'_________')    
+out.closed
